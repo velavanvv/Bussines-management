@@ -8,19 +8,21 @@
 </head>
 
 <body>
-	<a href="/services">Back to Services</a>
+	<a href="@{/login}">Back to login</a>
 	<div class="addUser">
-		<h3 style="color: red;">ADD NEW USER/CUSTOMER</h3>
-		<form action="" th:action="@{/addingUser}" method="post">
+		<h3 style="color: red;"> USER Registeration</h3>
+		<form action="" th:action="@{/register}" method="post">
 			<label for="name">User_Name :</label>
 			<input type="text" name="uname" required/>
 			<label for="email" />User_Email :
 			<input type="email" name="uemail" placeholder="Enter correct email"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}" required/>
 			<label for="telephone">User_Number :</label>
 			<input type="tel" name="unumber" required pattern="[0-9]{10}" placeholder="Enter correct number"/>
-			<input type="hidden" name="upassword" value="2330" />
-		</form>
-		<button type="submit">Add_User</button>
+			<label for="password">User Password</label>
+            <input type="password" name="upassword" required/>
+            <button type="submit">Add_User</button>
+        </form>
+
 	</div>
 </body>
 

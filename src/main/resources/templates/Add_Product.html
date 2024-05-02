@@ -11,14 +11,17 @@
 	<a href="/services">Back to Services</a>
 	<div class="addProducts">
 		<h3 style="font-weight: bolder;color: seagreen;">ADD NEW PRODUCT :</h3>
-		<form action="" th:action="@{/addingProduct}" method="post">
+		<form action="" th:action="@{/addingProduct}" method="post" enctype="multipart/form-data">
 			Product_Name :
-			<input type="text" name="pname" value="" placeholder="Enter Product Name....." /> <br />
+			<input type="text" name="pname" value="" placeholder="Enter Product Name....." required/> <br />
 			Product_Price :
-			<input type="text" name="pprice" placeholder="Enter Product Price...." /><br />
+			<input type="text" name="pprice" placeholder="Enter Product Price...." required /><br />
+			Product_Image :
+			<input type="file" name="file" value="" required/> <br />
+			
 			Product_Desc : <br />
 			<textarea name="pdescription" id="" cols="15" rows="1"
-				placeholder="Enter Product Description.."></textarea><br />
+				placeholder="Enter Product Description.." rquired></textarea><br />
 
 			<button type="submit">Add_Product</button>
 

@@ -29,8 +29,8 @@
 						<td th:text="${admin.adminEmail}"></td>
 						<td th:text="${admin.adminNumber}"></td>
 						<td><a style="color: blue;" href="" th:href="@{'/updateAdmin/'+${admin.adminId}}"><i
-									class="fa-solid fa-pen"></i></a><span>&nbsp;</span>
-							<a style="color: red;" href="" th:href="@{'/deleteAdmin/'+${admin.adminId}}"><i
+									class="fa-solid fa-pen"></i></a>update<span>&nbsp;</span>
+							<a style="color: red;" href="" th:href="@{'/deleteAdmin/'+${admin.adminId}}">delete<i
 									class="fa-solid fa-trash"></i></a>
 						</td>
 					</tr>
@@ -78,9 +78,9 @@
 						<td th:text="${product.pname}"></td>
 						<td th:text="${product.pprice}"></td>
 						<td><a style="color: blue;" href="" th:href="@{'/updateProduct/'+${product.pid}}"><i
-									class="fa-solid fa-pen"></i></a><span>&nbsp;</span>
+									class="fa-solid fa-pen"></i>update</a><!-- <span>&nbsp;</span> -->
 							<a style="color: red;" href="" th:href="@{'/deleteProduct/'+${product.pid}}"><i
-									class="fa-solid fa-trash"></i></a>
+									class="fa-solid fa-trash"></i>delete</a>
 						</td>
 					</tr>
 				</table>

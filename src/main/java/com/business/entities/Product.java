@@ -9,10 +9,31 @@ import jakarta.persistence.Id;
 public class Product
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pid;
 	private String pname;
 	private double pprice;
+	public String getPimage() {
+		return pimage;
+	}
+	public Product(String pname, double pprice, String pdescription) {
+		this.pname = pname;
+		this.pprice = pprice;
+		this.pdescription = pdescription;
+	}
+	public Product() {
+	}
+	public Product(int pid, String pname, double pprice, String pimage, String pdescription) {
+		this.pid = pid;
+		this.pname = pname;
+		this.pprice = pprice;
+		this.pimage = pimage;
+		this.pdescription = pdescription;
+	}
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
+	}
+	private String pimage;
 	private String pdescription;
 
 	public int getPid() {
@@ -41,10 +62,10 @@ public class Product
 	}
 	@Override
 	public String toString() {
-		return "Product [pid=" + pid + ", pname=" + pname + ", pprice=" + pprice + ", pdescription=" + pdescription
-				+ "]";
+		return "Product [pid=" + pid + ", pname=" + pname + ", pprice=" + pprice + ", pimage=" + pimage
+				+ ", pdescription=" + pdescription + "]";
 	}
-
+	
 
 
 }

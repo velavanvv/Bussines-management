@@ -11,17 +11,22 @@
 		<a href="/services">Back_To_Services</a>
 	<div class="updateProduct">
 		<h3 style="font-weight: bolder;color: seagreen;">UPDATE EXISTING PRODUCT :</h3>
-		<form action="" th:action="@{'/updatingProduct/'+${product.pid}}" th:object="${product}">
+		<form action="" th:action="@{'/updatingProduct/'+${product.pid}}" th:object="${product}" method="post" enctype="multipart/form-data">
 			Product_Id:
-			<input type="hidden" th:text="${product.pid}" th:value="${product.pid}" /><br />
-			Product_Name :
-			<input type="text" name="pname" th:value="${product.pname}" /> <br />
-			Product_Price :
-			<input type="text" name="pprice" th:value="${product.pprice}" /><br />
-			Product_Desc : <br />
-			<textarea name="pdescription" th:value="${product.pdescription}" id="" cols="10" rows="1">
+			<input type="hidden" th:text="${product.pid}" th:value="${product.pid}" required /><br />
 
-	</textarea><br />
+			<img th:src="'/images/'+${product.pimage}" alt="teaImage" />
+			Product_image:
+			<input type="file" name="file" /> <br />
+		
+			Product_Name :
+			<input type="text" name="pname" th:value="${product.pname}" required/> <br />
+			Product_Price :
+			<input type="text" name="pprice" th:value="${product.pprice}" required/><br />
+			Product_Desc : <br />
+			<input name="pdescription" th:value="${product.pdescription}" id="" cols="10" rows="1" required>
+
+	<br />
 			<button type="submit">Update_Product</button>
 
 		</form>

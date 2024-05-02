@@ -1,15 +1,17 @@
 package com.business.controllers;
 
-import java.util.List;
+import java.io.IOException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.business.entities.Product;
 import com.business.services.ProductServices;
@@ -22,24 +24,24 @@ public class ProductController
 
 	//	AddProduct
 	@PostMapping("/addingProduct")
-	public String addProduct(@ModelAttribute Product product)
+	public String addProduct(@RequestParam("pname") String name,@RequestParam("pprice")double price,@RequestParam("pdescription")String desc,@RequestParam("file")MultipartFile file) throws IOException
 	{
 
-		this.productServices.addProduct(product);
+		this.productServices.addProduct(name,price,desc,file);
 		return "redirect:/admin/services";
 	}
 
 	//	UpdateProduct
-	@GetMapping("/updatingProduct/{productId}")
-	public String updateProduct(@ModelAttribute Product product,@PathVariable("productId") int id)
+	@PostMapping("/updatingProduct/{productId}")
+	public String updateProduct(@PathVariable("productId") int id,@RequestParam("pname") String name,@RequestParam("pprice")double price,@RequestParam("pdescription")String desc,@RequestParam("file")MultipartFile file) throws IOException
 	{
 
-		this.productServices.updateproduct(product, id);
+		this.productServices.updateproduct(id,name,price,desc,file);
 		return "redirect:/admin/services";
 	}
 	//DeleteProduct
 	@GetMapping("/deleteProduct/{productId}")
-	public String delete(@PathVariable("productId") int id)
+	public String delete(@PathVariable("productId") int id) throws IOException
 	{
 		this.productServices.deleteProduct(id);
 		return "redirect:/admin/services";
