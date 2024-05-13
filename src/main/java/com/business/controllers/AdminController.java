@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.business.basiclogics.Logic;
-import com.business.entities.Admin;
+
 import com.business.entities.Orders;
 import com.business.entities.Product;
 import com.business.entities.User;
@@ -44,7 +44,7 @@ public class AdminController {
 	private User user;
 
 	// Validating login 
-	@GetMapping("/adminLogin")
+	/*@GetMapping("/adminLogin")
 	public String  getAllData(  @ModelAttribute("adminLogin") AdminLogin login, Model model)
 	{
 		String email=login.getEmail();
@@ -58,8 +58,8 @@ public class AdminController {
 			return "Login";
 		}
 
-	}
-
+	} */
+/* 
 	@GetMapping("/userlogin")
 	public String userLogin( @ModelAttribute("userLogin") UserLogin login,Model model)
 	{
@@ -80,9 +80,9 @@ public class AdminController {
 			return "Login";
 		}
 
-	}
+	} */
 	//Searching Product By Name
-	@PostMapping("/product/search")
+	@PostMapping("user/search")
 	public String seachHandler(@RequestParam("productName") String name,Model model)
 	{
 
@@ -107,7 +107,7 @@ public class AdminController {
 	public String returnBack(Model model)
 	{
 		List<User> users= this.services.getAllUser();
-		List<Admin>admins=this.adminServices.getAll(); 
+		List<User>admins=this.adminServices.getAll(); 
 		List<Product>products=this.productServices.getAllProducts();
 		List<Orders> orders = this.orderServices.getOrders();
 		model.addAttribute("users",users);
@@ -127,7 +127,7 @@ public class AdminController {
 
 	//Handling AddAdmin
 	@PostMapping("addingAdmin")
-	public String addAdmin( @ModelAttribute Admin admin)
+	public String addAdmin( @ModelAttribute User admin)
 	{
 
 		this.adminServices.addAdmin(admin);
@@ -139,18 +139,18 @@ public class AdminController {
 	@GetMapping("/updateAdmin/{adminId}")
 	public String update(@PathVariable("adminId") int id,Model model)
 	{
-		Admin admin = this.adminServices.getAdmin(id);
+		User admin = this.adminServices.getAdmin(id);
 		model.addAttribute("admin", admin);
 		return "Update_Admin";
 	}
 
 	//Handling Update Page
-	@GetMapping("/updatingAdmin/{id}")
+/* 	@GetMapping("/updatingAdmin/{id}")
 	public String updateAdmin(@ModelAttribute Admin admin,@PathVariable("id") int id)
 	{
 		this.adminServices.update(admin, id);
 		return "redirect:/admin/services";
-	}
+	} */
 
 	//IHandling delete operation
 	@GetMapping("/deleteAdmin/{id}")
@@ -161,14 +161,14 @@ public class AdminController {
 	}
 
 	//Invoking AddProduct Page
-	@GetMapping("/addProduct")
+	@GetMapping("admin/addProduct")
 	public String addProduct()
 	{
 		return "Add_Product";
 	}
 
 	//Invoking Update Product Page
-	@GetMapping("/updateProduct/{productId}")
+	@GetMapping("admin/updateProduct/{productId}")
 	public String updateProduct(@PathVariable("productId") int id,Model model)
 	{
 		Product product=this.productServices.getProduct(id);
@@ -178,14 +178,14 @@ public class AdminController {
 	}
 
 	//Invoking AddUser Page
-	@GetMapping("/addUser")
+	@GetMapping("admin/addUser")
 	public String addUser()
 	{
 		return "Add_User";
 	}
 
 	//Invoking UpdateUser Page
-	@GetMapping("/updateUser/{userId}")
+	@GetMapping("admin/updateUser/{userId}")
 	public String updateUserPage(@PathVariable("userId") int id,Model model)
 	{
 		User user = this.services.getUser(id);
@@ -193,7 +193,7 @@ public class AdminController {
 		return "Update_User";
 	}
 	//Placing  Order
-	@PostMapping("/product/order")
+	@PostMapping("user/product/order")
 	public String orderHandler(@ModelAttribute() Orders order,Model model)
 	{
 		double  totalAmount = Logic.countTotal(order.getoPrice(),order.getoQuantity());
@@ -206,7 +206,7 @@ public class AdminController {
 		return "Order_success";
 	}
 
-	@GetMapping("/product/back")
+	@GetMapping("user/product/back")
 	public String back(Model model)
 	{
 		List<Orders> orders = this.orderServices.getOrdersForUser(user);

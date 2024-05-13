@@ -18,14 +18,12 @@
 			<h4 >Product Name : <span  th:text="${s.pname}"></span></h4>
 			<h4>Product Price : <span th:text="'₹' +${s.pprice}"></span></h4>
 			
-			<a  href="/login" id="buy" >Buy_Now</a><br />
+			<a  th:href="@{user/product/back}" id="buy" >Buy_Now</a><br />
 		</div>
 
 	</section>
 	<script>
-		document.getElementById("buy").addEventListener("click",function(){
-			alert("Please Login as a User to buy Products")
-		});
+	
 	</script>
 </body>
 

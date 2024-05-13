@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.business.entities.Admin;
+
 import com.business.entities.User;
 import com.business.repositories.UserRepository;
 @Component
@@ -14,11 +15,15 @@ public class UserServices
 {
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 		
 	//Get All Users
 	public List<User> getAllUser()
 	{
-		List<User> users = (List<User>) this.userRepository.findAll();
+		List<User> users = (List<User>) this.userRepository.findByRole("USER");
 		return users;
 	}
 	
@@ -33,7 +38,7 @@ public class UserServices
 	//Get Single User By Email
 	public User getUserByEmail(String email)
 	{
-	 User user=	this.userRepository.findUserByUemail(email);
+	 User user=	this.userRepository.findByUemail(email);
 	 return user;
 	}
 	
@@ -51,12 +56,14 @@ public class UserServices
 	}
 
 	//Add User
-	public void addUser(User user)
-	{
+	public void addUser(User userDto)
+	{ 
+		userDto.setRole("USER");
+		User user = new User(userDto.getRole(),userDto.getUname(),userDto.getUemail(), passwordEncoder.encode(userDto.getPassword()) , userDto.getUnumber());
 	this.userRepository.save(user);
 	}
 	
-	public boolean validateLoginCredentials(String email,String password)
+/* 	public boolean validateLoginCredentials(String email,String password)
 	{
 		List<User> users = (List<User>) this.userRepository.findAll();
 		for(User u:users)
@@ -67,7 +74,7 @@ public class UserServices
 		}
 		}
 		return false;
-	}
+	} */
 	
 	
 

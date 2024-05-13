@@ -1,11 +1,15 @@
 package com.business.repositories;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
-import com.business.entities.Admin;
+
 import com.business.entities.User;
 
 public interface UserRepository extends CrudRepository<User,Integer>
 {
-public User findUserByUemail(String email);
+public User findByUemail(String email);
+
+public List<User> findByRole(String role);
 }

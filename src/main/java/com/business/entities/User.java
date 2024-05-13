@@ -1,9 +1,12 @@
 package com.business.entities;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,14 +17,32 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class User 
+public class User implements UserDetails
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int u_id;
-
+private String role;
+	public String getRole() {
+	return role;
+}
+public void setRole(String role) {
+	this.role = role;
+}
 	private String uname;
 	private String uemail;
+	public User(){
+
+	}
+	public User( String role, String uname, String uemail, String upassword, Long unumber) {
+		
+		this.role = role;
+		this.uname = uname;
+		this.uemail = uemail;
+		this.upassword = upassword;
+		this.unumber = unumber;
+	}
+
 	private String upassword;
 	private Long unumber;
 	
@@ -48,18 +69,17 @@ public class User
 		this.uname = uname;
 
 	}
+	public void setUpassword(String Upassword) {
+		this.upassword = Upassword;
+
+	}
 	public String getUemail() {
 		return uemail;
 	}
 	public void setUemail(String uemail) {
 		this.uemail = uemail;
 	}
-	public String getUpassword() {
-		return upassword;
-	}
-	public void setUpassword(String upassword) {
-		this.upassword = upassword;
-	}
+
 	public Long getUnumber() {
 		return unumber;
 	}
@@ -70,6 +90,35 @@ public class User
 	public String toString() {
 		return "User [u_id=" + u_id + ", uname=" + uname + ", uemail=" + uemail + ", upassword=" + upassword
 				+ ", unumber=" + unumber + ", orders=" + orders + "]";
+	}
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+	return List.of(()->getRole());
+	}
+	@Override
+	public String getPassword() {
+	return upassword;
+	}
+	@Override
+	public String getUsername() {
+		return uemail;
+		}
+	@Override
+	public boolean isAccountNonExpired() {
+	return true;	
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+	return true;	
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+	return true;	
+	}
+	@Override
+	public boolean isEnabled() {
+	return true;
 	}
 	
 

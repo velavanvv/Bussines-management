@@ -16,7 +16,7 @@ public class HomeController
 {
 	@Autowired
 	private ProductServices productServices;
-	@GetMapping("/home")
+	@GetMapping("user/home")
 	public String home()
 	{
 		return "Home";
@@ -43,9 +43,8 @@ public class HomeController
 	}
 
 	@GetMapping("/login")
-	public String login(Model model)
+	public String login()
 	{
-		model.addAttribute("adminLogin",new AdminLogin());
 		return "Login";
 	}
 }

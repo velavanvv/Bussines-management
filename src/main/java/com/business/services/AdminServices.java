@@ -5,53 +5,57 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.business.entities.Admin;
-import com.business.repositories.AdminRepository;
+
+import com.business.entities.User;
+
+import com.business.repositories.UserRepository;
 
 @Component
 public class AdminServices
 {
+	
+
 	@Autowired
-	private AdminRepository adminRepository;
+	private UserRepository userRepo;
 	
 	//Get All Admins
-	public List<Admin>getAll()
+	public List<User>getAll()
 	{
-		 List<Admin> admins = (List<Admin>)this.adminRepository.findAll();
+		 List<User> admins = userRepo.findByRole("ADMIN");
 		 return admins;
 	}
 	//Get Single Admin
-	public Admin getAdmin(int id)
+	public User getAdmin(int id)
 	{
-		Optional<Admin> optional = this.adminRepository.findById(id);
-		Admin admin=optional.get();
+		Optional<User> optional = this.userRepo.findById(id);
+		User admin=optional.get();
 		return admin;
 	}
 //Update Admin
-	public void update(Admin admin ,int id)
+	 public void update(User admin ,int id)
 	{
-		for (Admin ad : getAll()) 
+		for (User ad : getAll()) 
 		{
-			if(ad.getAdminId()==id)
+			if(ad.getU_id()==id)
 			{
-				this.adminRepository.save(admin);
+				this.userRepo.save(admin);
 			}
 		}
-	}
+	} 
 	
 	//delete User
 	public void delete(int id)
 	{
-		this.adminRepository.deleteById(id);
+		this.userRepo.deleteById(id);
 	}
 	
 	//add Admin
-	public void addAdmin(Admin admin)
+	public void addAdmin(User admin)
 	{
-		this.adminRepository.save(admin);
+		this.userRepo.save(admin);
 	}
 	
-	//Validating Admin login
+	/* //Validating Admin login
 	public boolean validateAdminCredentials(String email,String password)
 	{
 		Admin admin=adminRepository.findByAdminEmail(email);
@@ -60,5 +64,5 @@ public class AdminServices
 			return true;
 		}
 		return false;
-	}
+	} */
 }
